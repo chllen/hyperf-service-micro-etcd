@@ -1,0 +1,21 @@
+{
+    "name": "chllen/hyperf-service-micro-etcd",
+    "description": "A etcd adapter for service go-micro.",
+    "keywords": [
+        "php",
+        "swoole",
+        "hyperf",
+        "service",
+        "etcd-adapter"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Chllen\\HyperfServiceMicroEtcd\\": "src/"
+        }
+    },
+    "extra": {
+        "hyperf": {
+            "config": "Chllen\\HyperfServiceMicroEtcd\\ConfigProvider"
+        }
+    }
+}
