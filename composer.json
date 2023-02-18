@@ -8,6 +8,13 @@
         "service",
         "etcd-adapter"
     ],
+    "require": {
+        "php": ">=7.2",
+        "hyperf/contract": "~2.2.0",
+        "hyperf/service-governance": "~2.2.0",
+        "hyperf/utils": "~2.2.0",
+        "chllen/hyperf-grpc-client": "~1.0.0"
+    },
     "autoload": {
         "psr-4": {
             "Chllen\\HyperfServiceMicroEtcd\\": "src/"

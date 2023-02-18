@@ -13,8 +13,12 @@ namespace Chllen\HyperfServiceMicroEtcd\Listener;
 
 
 
-use Chllen\HyperfServiceMicro\DriverManager;
+use Chllen\HyperfGrpcClient\FrameworkManager;
+use Chllen\HyperfServiceMicroEtcd\GoMicroFramework;
+use Hyperf\ServiceGovernance\DriverManager;
 use Chllen\HyperfServiceMicroEtcd\EtcdDriver;
+use Hyperf\Event\Contract\ListenerInterface;
+use Hyperf\Framework\Event\BootApplication;
 
 class RegisterDriverListener implements ListenerInterface
 {
@@ -23,9 +27,15 @@ class RegisterDriverListener implements ListenerInterface
      */
     protected $driverManager;
 
-    public function __construct(DriverManager $manager)
+    /**
+     * @var FrameworkManager
+     */
+    protected $frameworkManager;
+
+    public function __construct(DriverManager $driver,FrameworkManager $framework)
     {
-        $this->driverManager = $manager;
+        $this->driverManager = $driver;
+        $this->frameworkManager = $framework;
     }
 
     public function listen(): array
@@ -37,6 +47,8 @@ class RegisterDriverListener implements ListenerInterface
 
     public function process(object $event)
     {
+        //注册go-micro框架解析
+        $this->frameworkManager->register('go-micro', make(GoMicroFramework::class));
         $this->driverManager->register('etcd', make(EtcdDriver::class));
     }
 }
